@@ -10,7 +10,7 @@ class FeaturedBooksItems extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 2.7/4,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8),
+        margin: const EdgeInsets.only(left: 16),
         height: MediaQuery.of(context).size.height * 0.2,
         width: 100,
         decoration: BoxDecoration(
