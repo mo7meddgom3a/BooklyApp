@@ -4,22 +4,74 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 
-class SplashViewBody extends StatelessWidget {
+class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
 
   @override
+  State<SplashViewBody> createState() => _SplashViewBodyState();
+}
+
+class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProviderStateMixin {
+
+  late AnimationController _animationController;
+  late Animation<Offset> _slidingAnimation;
+
+  @override
+  void initState() {
+
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+
+    _slidingAnimation = Tween<Offset>(
+      begin: const Offset(0, 8),
+      end: Offset.zero,
+
+    ).animate(_animationController);
+
+    _animationController.forward();
+    _slidingAnimation.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+
+    super.dispose();
+    _animationController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(AssetsData.logo),
-          // const SizedBox(height: 20),
-          // const CircularProgressIndicator(),
-          // const SizedBox(height: 20),
-          // const Text('   Loading...', style: TextStyle(color: Colors.white)),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SlideTransition(
+            position: _slidingAnimation ,
+            child: Image.asset(AssetsData.logo)),
+        const SizedBox(height: 6),
+
+        //if i wanna to only rebuild the text widget i can use the AnimatedBuilder widget and delete the addlistener method
+        // AnimatedBuilder(
+        //   animation: _slidingAnimation,
+        //   builder: (context, _) {
+        SlideTransition(
+          position: _slidingAnimation,
+           child: const Text(
+            "Read Free Books",
+            style: TextStyle(
+              fontSize: 15,
+            ),
+             textAlign: TextAlign.center,
+                   ),
+         ),
+
+      ],
     );
   }
 }
