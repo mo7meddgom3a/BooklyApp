@@ -11,36 +11,20 @@ class SplashViewBody extends StatefulWidget {
   State<SplashViewBody> createState() => _SplashViewBodyState();
 }
 
-class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProviderStateMixin {
-
+class _SplashViewBodyState extends State<SplashViewBody>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Offset> _slidingAnimation;
 
   @override
   void initState() {
-
     super.initState();
 
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
-
-    _slidingAnimation = Tween<Offset>(
-      begin: const Offset(0, 8),
-      end: Offset.zero,
-
-    ).animate(_animationController);
-
-    _animationController.forward();
-    _slidingAnimation.addListener(() {
-      setState(() {});
-    });
+    initSlidingAnimation();
   }
 
   @override
   void dispose() {
-
     super.dispose();
     _animationController.dispose();
   }
@@ -52,8 +36,7 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SlideTransition(
-            position: _slidingAnimation ,
-            child: Image.asset(AssetsData.logo)),
+            position: _slidingAnimation, child: Image.asset(AssetsData.logo)),
         const SizedBox(height: 6),
 
         //if i wanna to only rebuild the text widget i can use the AnimatedBuilder widget and delete the addlistener method
@@ -62,16 +45,32 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
         //   builder: (context, _) {
         SlideTransition(
           position: _slidingAnimation,
-           child: const Text(
+          child: const Text(
             "Read Free Books",
             style: TextStyle(
               fontSize: 15,
             ),
-             textAlign: TextAlign.center,
-                   ),
-         ),
-
+            textAlign: TextAlign.center,
+          ),
+        ),
       ],
     );
+  }
+
+  void initSlidingAnimation() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+
+    _slidingAnimation = Tween<Offset>(
+      begin: const Offset(-1, 8),
+      end: Offset.zero,
+    ).animate(_animationController);
+
+    _animationController.forward();
+    _slidingAnimation.addListener(() {
+      setState(() {});
+    });
   }
 }
