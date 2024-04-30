@@ -11,7 +11,7 @@ class BestSellerItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         GoRouter.of(context).push(AppRouter.KBookDetailsView);
       },
