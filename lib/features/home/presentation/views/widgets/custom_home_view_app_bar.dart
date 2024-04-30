@@ -15,7 +15,6 @@ class CustomHomeViewAppBar extends StatelessWidget {
             icon: const Icon(FontAwesomeIcons.barsStaggered),
             onPressed: () {},
           ),
-
           Image.asset(
             AssetsData.logo,
             height: 70,
@@ -26,11 +25,6 @@ class CustomHomeViewAppBar extends StatelessWidget {
             icon: const Icon(FontAwesomeIcons.magnifyingGlass),
             onPressed: () {},
           ),
-
-          // IconButton(
-          //   icon: const Icon(FontAwesomeIcons.bell),
-          //   onPressed: () {},
-          // ),
         ],
       ),
     );
