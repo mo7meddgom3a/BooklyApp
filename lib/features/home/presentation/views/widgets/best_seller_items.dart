@@ -44,7 +44,8 @@ class BestSellerItems extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Text(
                       "Harry Potter and the Goblet of Fire",
-                      style: Styles.textStyle20.copyWith(fontFamily: KGtSectraFine),
+                      style: Styles.textStyle20
+                          .copyWith(fontFamily: KGtSectraFine),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -66,7 +67,6 @@ class BestSellerItems extends StatelessWidget {
                         style: Styles.textStyle20
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
-
                       const Spacer(),
                       const BookRating(),
                     ],

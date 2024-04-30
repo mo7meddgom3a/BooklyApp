@@ -8,7 +8,7 @@ class FeaturedBooksItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 2.7/4,
+      aspectRatio: 2.7 / 4,
       child: Container(
         margin: const EdgeInsets.only(left: 16),
         height: MediaQuery.of(context).size.height * 0.2,
