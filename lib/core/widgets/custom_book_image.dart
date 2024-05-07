@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomBookImage extends StatelessWidget {
-  const CustomBookImage({super.key});
+  const CustomBookImage({super.key, required this.imageUrl});
+
+  final String imageUrl ;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,9 @@ class CustomBookImage extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.2,
           width: 100,
           decoration: BoxDecoration(
-            color: Colors.red,
-            image: const DecorationImage(
-              image: AssetImage(
-                AssetsData.testImage,
+            image:  DecorationImage(
+              image: NetworkImage(
+                imageUrl,
               ),
               fit: BoxFit.fill,
             ),
