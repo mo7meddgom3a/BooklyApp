@@ -3,12 +3,15 @@ import 'package:booklyapp/core/utils/assets.dart';
 import 'package:booklyapp/core/utils/constant.dart';
 import 'package:booklyapp/core/utils/styles.dart';
 import 'package:booklyapp/core/widgets/book_rating.dart';
+import 'package:booklyapp/core/widgets/custom_book_image.dart';
+import 'package:booklyapp/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BoocksItems extends StatelessWidget {
-  const BoocksItems({super.key});
+  const BoocksItems({super.key, required this.bookModel});
 
+  final BookModel bookModel;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -21,24 +24,7 @@ class BoocksItems extends StatelessWidget {
           padding: const EdgeInsets.only(right: 16.0),
           child: Row(
             children: [
-              AspectRatio(
-                aspectRatio: 3 / 4,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 16),
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        AssetsData.testImage,
-                      ),
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
+              CustomBookImage(imageUrl: bookModel.volumeInfo.imageLinks.thumbnail),
               const SizedBox(
                 width: 30,
               ),
@@ -49,7 +35,7 @@ class BoocksItems extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: Text(
-                        "Harry Potter and the Goblet of Fire",
+                        bookModel.volumeInfo.title!,
                         style: Styles.textStyle20
                             .copyWith(fontFamily: KGtSectraFine),
                         maxLines: 2,
@@ -59,22 +45,24 @@ class BoocksItems extends StatelessWidget {
                     const SizedBox(
                       height: 3,
                     ),
-                    const Text(
-                      "J.K. Rowling",
+                     Text(
+                      bookModel.volumeInfo.authors![0],
                       style: Styles.textStyle14,
-                    ),
+                       overflow: TextOverflow.ellipsis,
+                       maxLines: 1,
+                     ),
                     const SizedBox(
                       height: 3,
                     ),
                     Row(
                       children: [
                         Text(
-                          "19.99 €",
+                          "Free",
                           style: Styles.textStyle20
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         const Spacer(),
-                        const BookRating(),
+                         BookRating(rating: bookModel.volumeInfo.averageRating??0, ratingCount: bookModel.volumeInfo.ratingsCount??0),
                       ],
                     )
                   ],

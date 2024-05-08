@@ -13,6 +13,7 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
             child: Column(
